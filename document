@@ -1,0 +1,125 @@
++-----------------+
+|   Data Sources  |
++--------+--------+
+         | (CSV Data,
+         |  Real-time Stream - Optional)
+         v
++--------+--------+
+|  Data Ingestion |
+| (data_ingestion.py)|
++--------+--------+
+         | (Raw Data)
+         v
++--------+--------+
+| Feature       |
+| Engineering   |
+| (feature_     |
+|  engineering.py)|
++--------+--------+
+         | (Features)
+         v
++--------+--------+
+|   Data Storage  |
+| (Feature Store/|
+|   Database)   |
++--------+--------+
+         | (Stored Features)
+         v
++--------+--------+
+|   Model        |
+|   Training     |
+|  (training.py) |
++--------+--------+
+         | (Model, Metrics)
+         v
++--------+--------+
+| Trained Model  |
+|  & Data       |
+|  (models/)    |
++--------+--------+
+         | (Model for Inference)
+         v
++--------+--------+
+|  REST API     |
+|   (Flask)     |
+|    (api.py)    |
++--------+--------+
+         | (Transaction Data)
+         v
++--------+--------+
+| Feature       |
+| Engineering   |
+| (feature_     |
+|  engineering.py)|
++--------+--------+
+         | (Features)
+         v
++--------+--------+
+|   Model        |
+|   Inference    |
+|  (inference.py)|
++--------+--------+
+         | (Prediction, Score)
+         v
++--------+--------+
+| Prediction &  |
+| Explanation   |
+|  (inference.py)|
++--------+--------+
+         | (SHAP Values)
+         v
++--------+--------+
+|  SHAP Explainer|
+|  (inference.py)|
++--------+--------+
+
+
+
+Component Breakdown:
+
+Data Sources:
+
+Description: Where the transaction data originates.
+Contents:
+CSV File (creditcard.csv): Historical transaction data for training.
+Real-time Stream (Kafka/Kinesis): Optional, for streaming new transactions.
+Data Ingestion (data_ingestion.py):
+
+Description: Loads data from the sources, performs basic cleaning, and splits data into training and testing sets.
+File: data_ingestion.py
+Feature Engineering (feature_engineering.py):
+
+Description: Transforms raw data into features for the model. Creates features like Hour, Amount_relative_to_mean, etc. Handles training and inference modes to prevent data leakage.
+File: feature_engineering.py
+Data Storage (Feature Store/Database):
+
+Description: Stores feature-engineered data. Could be a relational database (PostgreSQL, MySQL) or a specialized feature store (Feast).
+Model Training (training.py):
+
+Description: Trains the fraud detection model on the feature-engineered data. Evaluates the model using metrics like precision, recall, F1-score, and Average Precision.
+File: training.py
+Trained Model & Data (models/):
+
+Description: Stores the trained model file (e.g., fraud_detection_model.joblib) and other necessary data (e.g., mean_amount.joblib, mean_amount_by_hour.joblib).
+Directory: models/
+REST API (Flask) (api.py):
+
+Description: A Flask web application that provides a REST API endpoint (/predict) for real-time fraud prediction.
+File: api.py
+Feature Engineering (feature_engineering.py):
+
+Description: (Same as step 3) Applies the same feature engineering logic to new transactions received by the API.
+Model Inference (inference.py):
+
+Description: Loads the trained model and makes predictions on new, feature-engineered transaction data.
+File: inference.py
+Prediction & Explanation (inference.py):
+
+Description: Generates the prediction (fraud/not fraud), the anomaly score, and uses the SHAP explainer to provide feature contributions.
+SHAP Explainer (inference.py):
+
+Description: Calculates and returns SHAP values to explain individual predictions.
+Data Flow:
+
+Training: Data Sources -> Data Ingestion -> Feature Engineering -> Data Storage -> Model Training -> Trained Model & Data
+Inference: REST API -> Feature Engineering -> Model Inference -> Prediction & Explanation -> SHAP Explainer
