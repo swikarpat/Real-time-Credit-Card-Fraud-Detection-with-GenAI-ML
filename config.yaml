@@ -1,0 +1,17 @@
+data:
+  raw_data_path: "data/raw/creditcard.csv"
+  processed_train_data_path: "data/processed/train_data.csv"
+  processed_test_data_path: "data/processed/test_data.csv"
+train_test_split:
+  test_size: 0.2
+  random_state: 42
+train:
+  model: "IsolationForest"  # Options: IsolationForest, LogisticRegression, etc.
+  n_estimators: 150        # For Isolation Forest and tree-based models
+  contamination: 0.01   # For Isolation Forest - adjust based on your data
+  random_state: 42
+  val_size: 0.2
+model:
+  model_path: "models/fraud_detection_model.joblib"
+  mean_amount_path: "models/mean_amount.joblib"
+  mean_amount_by_hour_path: "models/mean_amount_by_hour.joblib"

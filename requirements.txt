@@ -1,0 +1,9 @@
+pandas
+scikit-learn
+joblib
+pyyaml
+flask
+shap
+pytest
+xgboost  # If you want to use XGBoost
+lightgbm # If you want to use LightGBM
