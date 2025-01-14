@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project implements a real-time credit card fraud detection system using machine learning, specifically focusing on anomaly detection techniques. The system is designed to be production-ready, with a modular code structure, comprehensive testing, and a REST API for real-time predictions.  We also emphasize explainability, leveraging techniques like SHAP (SHapley Additive exPlanations) to provide insights into why a transaction is flagged as potentially fraudulent.
+This project implements a real-time credit card fraud detection system using machine learning, specifically focusing on anomaly detection techniques. The system is designed to be production-ready, with a modular code structure, comprehensive testing, and a REST API for real-time predictions.  There is also emphasize explainability, leveraging techniques like SHAP (SHapley Additive exPlanations) to provide insights into why a transaction is flagged as potentially fraudulent.
 
 ## Dataset
 
